@@ -52,9 +52,13 @@ class PrintUtils {
      */
     public static void printParksCities(ArrayList<Park> parkArrList, ArrayList<City> cityArrList) {
         for (int i = 0; i < parkArrList.size(); i++) {
-            System.out.println("Parque ID: " + parkArrList.get(i).getParkId()
+            System.out.println("\nParque ID: " + parkArrList.get(i).getParkId()
                     + "\n" + parkArrList.get(i) + "\nCuidad: " + cityArrList.get(i).getCityName());
             System.out.println();
+        }
+        
+        if (parkArrList.isEmpty()) {
+            System.out.println("\nNo hay parques que contengan esa combinación de letras dentro su nombre.");
         }
     }    
 }
