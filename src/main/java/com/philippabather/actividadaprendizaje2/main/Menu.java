@@ -147,7 +147,7 @@ public class Menu {
                 errorNotification(sqle);                        
             }          
         } else {                                                                //si la cuidad NO existe, notifica al usuario
-            System.out.println("\n*** La cuidad no está reconocida. ***");            
+            System.out.println("\n* La cuidad no está reconocida. *\n");            
         }
     }    
  

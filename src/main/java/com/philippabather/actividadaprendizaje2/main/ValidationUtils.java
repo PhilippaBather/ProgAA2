@@ -61,13 +61,14 @@ class ValidateUtils {
         
         while (!isDouble) {
             if (sc.hasNextDouble()) {
-                area = Double.parseDouble(sc.next());
+                //area = Double.parseDouble(sc.next());
+                area = sc.nextDouble();
                 break;
             } else {
                 System.out.println("La entrada es inválida.");
                 System.out.println("Introduzca un número decimal (locale españa): ");
-                sc.next();
                 isDouble = false;
+                sc.next();
             }
         }
         return area;
