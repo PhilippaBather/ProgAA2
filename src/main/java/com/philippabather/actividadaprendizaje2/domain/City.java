@@ -52,6 +52,6 @@ public class City {
     
     @Override
     public String toString() {
-        return "ID: " + cityId + "; Nombre: " + cityName + "; Region: " + ccaa;
+        return "ID: " + cityId + "; Nombre: " + cityName + "; Región: " + ccaa;
     } 
 }

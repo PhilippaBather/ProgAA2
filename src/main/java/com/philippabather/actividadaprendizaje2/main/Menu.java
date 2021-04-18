@@ -358,6 +358,7 @@ public class Menu {
         if (!cities.isEmpty()) {
             try {
                 parkDAO.deleteParks(cities.get(0));
+                System.out.println("Los parques en " + cities.get(0) + " han sido eliminado.");
             } catch (SQLException sqle) {
                 errorNotification(sqle);
             }
