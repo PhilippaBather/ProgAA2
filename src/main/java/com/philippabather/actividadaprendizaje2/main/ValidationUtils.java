@@ -61,7 +61,6 @@ class ValidateUtils {
         
         while (!isDouble) {
             if (sc.hasNextDouble()) {
-                //area = Double.parseDouble(sc.next());
                 area = sc.nextDouble();
                 break;
             } else {
@@ -167,7 +166,7 @@ class ValidateUtils {
                 }
                 else {
                 System.out.println("La entrada es inválida.");
-                System.out.println("Introduzca 0 para modificar o 1 para continuar.");                      
+                System.out.println("Introduzca 0 para modificar o 1 para continuar.");                    
                 }
             } catch (NumberFormatException nfe) {
                 System.out.println("La entrada es inválida.");
