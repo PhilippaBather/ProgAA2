@@ -92,16 +92,19 @@ public class Menu {
      * los métodos parksInCity en el paquete DAO y printParks en la clase
      * PrintUtils.java.  Se refiere al Menú Opción 1.
      */
-    public void parksByCity() {
-        System.out.println("Introduzca el nombre de la cuidad: ");
-        String city = formatStringInput(input.nextLine().toLowerCase());        //formatea la entrada       
-                
-        try {
-            ArrayList<Park> parksArrList = parkDAO.parksInCity(city);
-            System.out.println("\nParques en " + city + ": ");
-            printParks(parksArrList);
-        } catch (SQLException sqle) {
-            errorNotification(sqle);
+    public void parksByCity() {        
+        ArrayList<City> citiesArrList = searchCitiesByName();                   //obtiene cuidades con este nombre en la BBDD
+        if (!citiesArrList.isEmpty()) {                                         //si la cuidad existe
+            try {
+                String city = citiesArrList.get(0).getCityName();               
+                ArrayList<Park> parksArrList = parkDAO.parksInCity(city);       //obtiene los parques en la cuidad
+                System.out.println("\nParques en " + city + ": ");
+                printParks(parksArrList);
+            } catch (SQLException sqle) {
+                errorNotification(sqle);
+            }
+        } else {
+            System.out.println("\n** La cuidad no existe en la BBDD. **\n");    //si no existe, notifica al usuario
         }
     }
     
@@ -345,7 +348,7 @@ public class Menu {
                 errorNotification(sqle);
             }
         } else {
-            System.out.println("La cuidad no está reconocida.\n");
+            System.out.println("\n**** La cuidad no está reconocida. ****\n");
         }       
     }    
 
@@ -358,6 +361,7 @@ public class Menu {
         if (!cities.isEmpty()) {
             try {
                 parkDAO.deleteParks(cities.get(0));
+                System.out.println("Los parques en " + cities.get(0) + " han sido eliminado.");
             } catch (SQLException sqle) {
                 errorNotification(sqle);
             }
@@ -374,7 +378,7 @@ public class Menu {
      * @return ArrayList del objeto City
      */           
     public ArrayList<City> searchCitiesByName() {
-        System.out.println("Nombre de la cuidad: ");
+        System.out.println("Introduzca el nombre de la cuidad: ");
         String cityName = formatStringInput(input.nextLine().toLowerCase());    //formateo la etnrada
         
         //comprobamos si el existe existe y si hay más que uno en el BBDD        
@@ -397,7 +401,7 @@ public class Menu {
         double areaTotal = validateArea();
         try {
             ArrayList<City> cities = cityDAO.totalArea(areaTotal);
-            System.out.println("Las cuidades con una extension más de " + areaTotal + ": \n");
+            System.out.println("Las cuidades con una extension más de " + areaTotal + " hectáreas: \n");
             printCities(cities);
         } catch (SQLException sqle) {
             errorNotification(sqle);
