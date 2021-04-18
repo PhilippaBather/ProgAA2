@@ -160,12 +160,18 @@ class ValidateUtils {
         boolean isValid = false;
         int response = - 1;
         while (!isValid) {
-            response = Integer.parseInt(sc.next());
-            if (response == 0 || response == 1){
+            try {
+                response = Integer.parseInt(sc.next());
+                if (response == 0 || response == 1) {
                     isValid = true;
-            } else {
+                }
+                else {
                 System.out.println("La entrada es inválida.");
-                System.out.println("Introduzca 0 para modificar o 1 para continuar.");
+                System.out.println("Introduzca 0 para modificar o 1 para continuar.");                      
+                }
+            } catch (NumberFormatException nfe) {
+                System.out.println("La entrada es inválida.");
+                System.out.println("Introduzca 0 para modificar o 1 para continuar.");                
             }
         }
         return response;

@@ -39,7 +39,7 @@ public class Menu {
      */
     public void executeMenu() {
         do {
-            System.out.println("*\t\t\t\tParques\t\t\t\t*\n");
+            System.out.println("*\n\t\t\t\tParques\t\t\t\t*\n");
             System.out.println("1. Listar los parques de una ciudad por nombre");
             System.out.println("2. Listar los parques de CCAA por nombre");
             System.out.println("3. Insertar un parque");
