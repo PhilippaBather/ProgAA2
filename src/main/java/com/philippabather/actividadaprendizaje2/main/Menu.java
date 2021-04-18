@@ -82,7 +82,7 @@ public class Menu {
                     exit();
                     break;
                 default:
-                    System.out.println("Entrada no reconocida.\n");
+                    System.out.println("\n*** Entrada no reconocida. ***\n");
             }
         } while(!exit);
     }
@@ -133,7 +133,8 @@ public class Menu {
     
     /**
      * Obtiene una coleción de cuidades en una CCAA introducida por el usuario.
-     * @return 
+     * @param ccaa
+     * @return una coleción de City
      */
     public ArrayList<City> searchCCAA(String ccaa) {
         ArrayList<City> citiesArrList = new ArrayList<>();
@@ -164,7 +165,7 @@ public class Menu {
                 boolean isDuplicate = parkDAO.isDuplicate(park);
                 if (!isDuplicate) {                  
                     parkDAO.insertIntoPark(park);
-                    System.out.println("\nEl parque ha sido insertado.");
+                    System.out.println("\n*** El parque ha sido insertado. ***\n");
                 }
             } catch (SQLException sqle) {
                 errorNotification(sqle);                        
@@ -308,26 +309,22 @@ public class Menu {
             int cityId;
             //si la cuidad no existe en la BBDD, añadelo
             if (cityArrList.isEmpty()){
-                System.out.println("La cuidad no está registrado.");            //notifica al usuario
+                System.out.println("\n*** La cuidad no está registrado. ***\n");            //notifica al usuario
                 System.out.println("Introduzca la Comunidad Autónoma: ");       //obtiene la CCAA relacionada
                 String ccaa = formatStringInput(input.nextLine().toLowerCase());//formatea la entrada
                 cityDAO.insertIntoCity(name, ccaa);                             //añade el registro a la BBDD en la tabla CUIDAD
                 cityArrList = cityDAO.getCityRecords(name);                     //obtiene el registro y desde la BBDD
                 cityId = cityArrList.get(0).getCityId();                        //y pone el valor la ID de la nueva cuidad
             } else{
-                if (cityArrList.isEmpty()) {
-                    cityId = cityArrList.get(0).getCityId();                    //pone el valor de la ID de la cuidad
-                } else {                                                        //else -else: si más de 1 cuidad
-                    cityId = selectCity(cityArrList);                           //pone el valor de la ID de la cuidad elegida por el usuario
-                }
+                cityId = cityArrList.get(0).getCityId();                        //pone el valor de la ID de la cuidad
             }
-            parkDAO.updateParkCityId(cityId, parkId);                              //actualiza el registro de la CUIDAD_ID en la tabla PARQUE
+            parkDAO.updateParkCityId(cityId, parkId);                           //actualiza el registro de la CUIDAD_ID en la tabla PARQUE
+            System.out.println("\n*** El parque ha sido actualizado. ***\n");
         } catch (SQLException sqle) {
                 errorNotification(sqle);
-        }
-   
+        }   
     }
-
+    
     /**
     * Identifica todos los parques cuyo nombre contenga una determinada cadena
     * entrada por el usuario y invoca el método printParksCities para imprimir
