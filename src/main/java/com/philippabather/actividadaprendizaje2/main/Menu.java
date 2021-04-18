@@ -104,7 +104,7 @@ public class Menu {
                 errorNotification(sqle);
             }
         } else {
-            System.out.println("\n** La cuidad no existe en la BBDD. **\n");    //si no existe, notifica al usuario
+            System.out.println("\n*** La cuidad no existe en la BBDD. ***\n");    //si no existe, notifica al usuario
         }
     }
     
@@ -116,16 +116,36 @@ public class Menu {
     public void parksByCCAA() {
         System.out.println("Nombre de la Comunidad Autónoma: ");
         String ccaa = formatStringInput(input.nextLine().toLowerCase());        //formatea la entrada
+        ArrayList<City> citiesArrList = searchCCAA(ccaa);
         
+        if (!citiesArrList.isEmpty()) {        
+            try {
+                ArrayList<Park> parksArrList = parkDAO.parksInCcaa(ccaa);
+                System.out.println("\nParques en la CCAA " + ccaa + ": ");
+                printParks(parksArrList);            
+            } catch (SQLException sqle) {
+                errorNotification(sqle);
+            }
+        } else {
+            System.out.println("\n*** La CCAA no existe en la BBDD. ***\n");
+        }
+    }
+    
+    /**
+     * Obtiene una coleción de cuidades en una CCAA introducida por el usuario.
+     * @return 
+     */
+    public ArrayList<City> searchCCAA(String ccaa) {
+        ArrayList<City> citiesArrList = new ArrayList<>();
         try {
-            ArrayList<Park> parksArrList = parkDAO.parksInCcaa(ccaa);
-            System.out.println("\nParques en la CCAA " + ccaa + ": ");
-            printParks(parksArrList);            
+            citiesArrList = cityDAO.getCCAAByName(ccaa);
         } catch (SQLException sqle) {
             errorNotification(sqle);
-        }   
+        }
+        
+        return citiesArrList;
     }
-       
+           
     /**
      * Añade un parque a una determinada cuidad (por nombre) siempre y cuando
      * la cuidad exista en el BBDD; el procedimiento se refiere a Menú Opción 3.     * 
@@ -150,7 +170,7 @@ public class Menu {
                 errorNotification(sqle);                        
             }          
         } else {                                                                //si la cuidad NO existe, notifica al usuario
-            System.out.println("\n* La cuidad no está reconocida. *\n");            
+            System.out.println("\n*** La cuidad no está reconocida. ***\n");            
         }
     }    
  
@@ -197,7 +217,7 @@ public class Menu {
                 }
             }
         }else {
-            System.out.println("El parque no existe en el BBDD.\n");
+            System.out.println("\n*** El parque no existe en el BBDD. ***\n");
         }
     }
     
@@ -348,7 +368,7 @@ public class Menu {
                 errorNotification(sqle);
             }
         } else {
-            System.out.println("\n**** La cuidad no está reconocida. ****\n");
+            System.out.println("\n*** La cuidad no está reconocida. ***\n");
         }       
     }    
 
@@ -366,7 +386,7 @@ public class Menu {
                 errorNotification(sqle);
             }
         } else {
-            System.out.println("\n**** La cuidad no esta reconocida. ****\n");            
+            System.out.println("\n*** La cuidad no esta reconocida. ***\n");            
         }
     }
     

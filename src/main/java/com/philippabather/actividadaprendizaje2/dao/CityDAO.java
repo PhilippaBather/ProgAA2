@@ -146,4 +146,16 @@ public class CityDAO {
       
         return cities;
     }
+    
+    public ArrayList<City> getCCAAByName(String ccaa) throws SQLException {
+        String sql = "SELECT * FROM CUIDAD WHERE CCAA = ?";
+        
+        PreparedStatement statement = con.getConexion().prepareStatement(sql);
+        statement.setString(1, ccaa);
+        ResultSet result = statement.executeQuery();
+        
+        ArrayList<City> cities = returnCityArrayList(result);
+        
+        return cities;
+    }
 }
