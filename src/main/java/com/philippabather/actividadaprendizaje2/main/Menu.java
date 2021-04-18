@@ -39,7 +39,7 @@ public class Menu {
      */
     public void executeMenu() {
         do {
-            System.out.println("*\n\t\t\t\tParques\t\t\t\t*\n");
+            System.out.println("\n*\t\t\t\tParques\t\t\t\t*\n");
             System.out.println("1. Listar los parques de una ciudad por nombre");
             System.out.println("2. Listar los parques de CCAA por nombre");
             System.out.println("3. Insertar un parque");
@@ -334,11 +334,12 @@ public class Menu {
     public void areaGreaterThan() {
         ArrayList<City> cityArrList = searchCitiesByName();
         if (!cityArrList.isEmpty()) {                                           //si la cuidad existe
+            System.out.println("Introduzca una extensión: ");
             double area = validateArea();                                       //obtiene y valida el área
             try {                                                               //imprime el núermo de parques
                 System.out.println("\nNúmero de parques en " + cityArrList.get(0).getCityName() 
                         + " con una extensión más de "           
-                        + area + ": " + parkDAO.parkArea(cityArrList.get(0).getCityId(), area));
+                        + area + " hectáreas: " + parkDAO.parkArea(cityArrList.get(0).getCityId(), area));
                 System.out.println();
             } catch (SQLException sqle) {
                 errorNotification(sqle);
